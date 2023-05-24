@@ -1,8 +1,8 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, Regexp, InputRequired
-import csv
+import csv, time
 
 
 
@@ -33,7 +33,7 @@ app.config['SECRET_KEY'] = 'f2rf9IqLanFg7AQ6t3011La84xAvMT0pwA4Z5rWz'
 
 
 @app.route('/cadastro', methods=['GET', 'POST'])
-def cadastrar():
+def cadastro():
     form = CadastroForm()
 
     if form.validate_on_submit():
@@ -49,13 +49,14 @@ def cadastrar():
             writer = csv.writer(file)
             writer.writerow([nome, sobrenome, email, telefone, cpf])
 
+        
         return redirect(url_for('success'))
-
+    
     return render_template('cadastro.html', form=form)
 
 @app.route('/success')
 def success():
-    return "Cadastro realizado com sucesso!"
+    return render_template('success.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

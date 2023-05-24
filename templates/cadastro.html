@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cadastro de Pessoas</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+
+    .form-container .form-group label {
+      font-weight: bold;
+    }
+
+    .form-container .btn {
+      background-color: #28a745;
+      color: #ffffff;
+    }
+
+    .form-container .btn:hover {
+      background-color: #218838;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-container">
+          <h2>Cadastro de Pessoas</h2>
+          <form method="POST" action="{{ url_for('cadastro') }}">
+            {{ form.csrf_token }}
+            <div class="form-group">
+              <label for="nome">Nome:</label>
+              {{ form.nome(class_='form-control', placeholder='Digite seu nome') }}
+              {% for error in form.nome.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="sobrenome">Sobrenome:</label>
+              {{ form.sobrenome(class_='form-control', placeholder='Digite seu sobrenome') }}
+              {% for error in form.sobrenome.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              {{ form.email(class_='form-control', placeholder='Digite seu email') }}
+              {% for error in form.email.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone:</label>
+              {{ form.telefone(class_='form-control', placeholder='Digite seu telefone') }}
+              {% for error in form.telefone.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+            <script>
+                $(document).ready(function() {
+                $('#telefone').mask('(00) 00000-0000');
+                });
+            </script>
+              
+            <div class="form-group">
+              <label for="cpf">CPF:</label>
+              {{ form.cpf(class_='form-control', placeholder='Digite seu CPF') }}
+              {% for error in form.cpf.errors %}
+                <small class="form-text text-danger">{{ error }}</small>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar </button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+            
+            
